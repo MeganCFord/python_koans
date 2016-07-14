@@ -34,7 +34,31 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    points = 0
+    occurances = dict()
+
+    for num in dice:
+        occurances[num] = dice.count(num)
+
+    for num, occurance in occurances.items():
+        if occurance >= 3:
+            subtractedthree = occurance - 3
+
+            if num == 1:
+                points += 1000
+                points += subtractedthree * 100
+            elif num == 5:
+                points += num * 100
+                points += subtractedthree * 50
+            else:
+                points += num * 100
+        else:
+            if num == 1:
+                points += occurance * 100
+            elif num == 5:
+                points += occurance * 50
+
+    return points
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
